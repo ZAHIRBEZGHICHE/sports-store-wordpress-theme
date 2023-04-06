@@ -1,0 +1,24 @@
+{% if settings.promo_banner %}
+  <div class="promo-banner">
+    <img src="{{ settings.promo_banner | img_url }}" alt="{{ settings.promo_banner.alt }}">
+  </div>
+{% endif %}
+{% if section.settings.carousel_images %}
+  <div class="carousel">
+    {% for image in section.settings.carousel_images %}
+      <img src="{{ image | img_url }}" alt="{{ image.alt }}">
+    {% endfor %}
+  </div>
+{% endif %}
+{% for link in linklists.main-menu.links %}
+  <a href="{{ link.url }}" class="{{ link.active }}">{{ link.title }}</a>
+{% endfor %}
+{% for product in collections.bestsellers.products limit: 4 %}
+  <div class="product">
+    <a href="{{ product.url }}">
+      <img src="{{ product.featured_image | product_img_url }}" alt="{{ product.featured_image.alt }}">
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.price | money }}</p>
+    </a>
+  </div>
+{% endfor %}
